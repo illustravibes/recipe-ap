@@ -14,7 +14,7 @@ Berikut version yang sudah kita naikkan dari versi aslinya.
 
 ## Running Development
 1. buat file `.env` bisa copy dari `.env.sample`
-2. Untuk running development bisa gunakan `docker-compose-dev.yml`
+2. Untuk running development bisa gunakan `docker-compose.dev.yml`
 3. Menggunakan docker compose, gunakan perintah:
 ```
 docker compose -f docker-compose.dev.yml up -d
@@ -37,7 +37,11 @@ php artisan shield:generate --all
 ```
 php artisan shield:super-admin --user=1
 ```
-8. Login menggunakan 
+8. Running key generate
+```
+php artisan key:generate
+```
+9. Login menggunakan 
 ```bash
 email : test@example.com
 pass : password
