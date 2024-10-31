@@ -71,5 +71,8 @@ services:
             - developer-net
 
 networks:
-    developer-net:
-#        external: true
+  developer-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 152.0.0.0/10

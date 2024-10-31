@@ -1,0 +1,11 @@
+.custom-marker .leaflet-marker-icon {
+    background-image: url('/path/to/your/custom-marker-icon.png');
+    background-size: cover; /* Jika diperlukan */
+    width: 32px; /* Sesuaikan ukuran sesuai dengan kebutuhan */
+    height: 32px; /* Sesuaikan ukuran sesuai dengan kebutuhan */
+}
+
+/* Menghapus shadow marker jika tidak diperlukan */
+.custom-marker .leaflet-marker-shadow {
+    display: none;
+}
