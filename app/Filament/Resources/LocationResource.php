@@ -45,7 +45,6 @@ class LocationResource extends Resource
                     ->extraAttributes(['class' => 'custom-marker'])
                     ->liveLocation(false)
                     ->showMarker(false)
-                    ->showMarker()
                     ->markerColor("#22c55eff")
                     ->showFullscreenControl()
                     ->showZoomControl()
