@@ -43,8 +43,8 @@ class LocationResource extends Resource
                         'min-height: 50vh', // Adjusting the map height to 50vh
                     ])
                     ->extraAttributes(['class' => 'custom-marker'])
-                    ->liveLocation(false)
-                    ->showMarker(false)
+                    ->liveLocation(true)
+                    ->showMarker(true)
                     ->markerColor("#22c55eff")
                     ->showFullscreenControl()
                     ->showZoomControl()

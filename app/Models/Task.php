@@ -9,7 +9,7 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mariadb';
+//    protected $connection = 'mariadb';
 
     protected $fillable = [
         'name',

@@ -83,6 +83,7 @@ class ApplicationDocumentResource extends Resource
                                 ->required(),
                         ]),
                 ])->extraAttributes(['class' => 'w-full'])
+                ->columnSpanFull()
             ]);
     }
 

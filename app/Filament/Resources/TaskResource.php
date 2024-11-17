@@ -49,7 +49,7 @@ class TaskResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->description(fn (Task $record): string => $record->description)
+                    ->description(fn(Task $record): string => $record->description ?? '-')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('mandays')
