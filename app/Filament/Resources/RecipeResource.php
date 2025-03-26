@@ -104,6 +104,15 @@ class RecipeResource extends Resource
                             ->columns(3)
                             ->columnSpanFull()
                     ]),
+
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\Textarea::make('secret_instructions')
+                            ->label('Secret Recipe Instructions')
+                            ->helperText('This will be encrypted and only visible to authorized users')
+                            ->columnSpan('full'),
+                    ])
+                    ->columns(2),
             ]);
     }
 
@@ -135,6 +144,9 @@ class RecipeResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('has_secret')
+                    ->label('Secret Recipe')
+                    ->boolean(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('category')

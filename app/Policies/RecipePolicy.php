@@ -105,4 +105,13 @@ class RecipePolicy
     {
         return $user->can('reorder_recipe');
     }
+
+    /**
+     * Determine whether the user can view secret instructions.
+     */
+    public function viewSecretInstructions(User $user, Recipe $recipe)
+    {
+        // Custom logic: owner or admin can view
+        return $user->id === $recipe->user_id || $user->isAdmin();
+    }
 }
