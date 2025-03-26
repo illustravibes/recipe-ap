@@ -13,15 +13,13 @@ class Ingredient extends Model
     protected $fillable = [
         'name',
         'description',
-        'default_unit', // Optional default unit if you want to suggest units
+        'default_unit'
     ];
 
-    /**
-     * The recipes that belong to the ingredient.
-     */
+    // Definisi relasi
     public function recipes(): BelongsToMany
     {
-        return $this->belongsToMany(Recipe::class, 'recipe_ingredients')
+        return $this->belongsToMany(Recipe::class, 'recipes_ingredients')
             ->withPivot('amount', 'unit')
             ->withTimestamps();
     }

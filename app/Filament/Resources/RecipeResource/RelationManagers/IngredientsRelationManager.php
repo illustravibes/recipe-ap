@@ -24,6 +24,25 @@ class IngredientsRelationManager extends RelationManager
                     ->options(Ingredient::all()->pluck('name', 'id'))
                     ->searchable()
                     ->required()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')
+                            ->required() // Pastikan field ini required
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('default_unit')
+                            ->label('Default Unit')
+                            ->maxLength(50),
+                    ])
+                    ->createOptionUsing(function (array $data) {
+                        // Validasi tambahan
+                        if (!isset($data['name']) || empty($data['name'])) {
+                            throw new \Exception('Ingredient name is required');
+                        }
+                        
+                        return Ingredient::create([
+                            'name' => $data['name'],
+                            'default_unit' => $data['default_unit'] ?? null,
+                        ]);
+                    })
                     ->reactive()
                     ->afterStateUpdated(function (callable $set, $state) {
                         $ingredient = Ingredient::find($state);

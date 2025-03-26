@@ -72,11 +72,19 @@ class RecipeResource extends Resource
                         Forms\Components\Repeater::make('ingredients')
                             ->relationship()
                             ->schema([
-                                Forms\Components\Select::make('ingredient_id')
+                                Forms\Components\Select::make('id')  // Change this from 'ingredient_id' to 'id'
                                     ->label('Ingredient')
                                     ->options(Ingredient::all()->pluck('name', 'id'))
                                     ->searchable()
                                     ->required()
+                                    ->createOptionForm([
+                                        Forms\Components\TextInput::make('name')
+                                            ->required()
+                                            ->maxLength(255),
+                                        Forms\Components\TextInput::make('default_unit')
+                                            ->label('Default Unit')
+                                            ->maxLength(50),
+                                    ])
                                     ->reactive()
                                     ->afterStateUpdated(function (callable $set, $state) {
                                         $ingredient = Ingredient::find($state);

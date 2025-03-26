@@ -19,24 +19,26 @@ class IngredientResource extends Resource
 {
     protected static ?string $model = Ingredient::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-beaker'; // Icon yang lebih cocok untuk ingredient
+
+    protected static ?string $navigationGroup = 'Recipe Management'; // Mengelompokkan di navigasi yang sama
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Section::make()
+                Forms\Components\Section::make('Ingredient Information')
                     ->schema([
-                        Forms\Components\Grid::make()
-                            ->schema([
-                                Forms\Components\TextInput::make('name')
-                                    ->label('Name')
-                                    ->required(),
-                                Forms\Components\Textarea::make('description')
-                                    ->label('Description'),
-                                Forms\Components\Textarea::make('default_unit')
-                                    ->label('Default Unit'),
-                            ]),
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('default_unit')
+                            ->label('Default Unit (e.g., gram, cup, tablespoon)')
+                            ->maxLength(50),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Description')
+                            ->maxLength(1000)
+                            ->columnSpanFull(),
                     ]),
             ]);
     }
@@ -72,7 +74,7 @@ class IngredientResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\RecipesRelationManager::class,
         ];
     }
 

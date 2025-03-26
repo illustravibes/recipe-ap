@@ -19,7 +19,9 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag'; // Icon yang lebih cocok untuk kategori
+
+    protected static ?string $navigationGroup = 'Recipe Management'; // Mengelompokkan di navigasi yang sama dengan Recipe
 
     public static function form(Form $form): Form
     {
@@ -67,7 +69,7 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\RecipesRelationManager::class,
         ];
     }
 
@@ -85,13 +87,26 @@ class CategoryResource extends Resource
     {
         return $infolist
             ->schema([
-                Infolists\Components\Section::make('Info')
+                Infolists\Components\Section::make('Category Information')
                     ->schema([
                         Infolists\Components\Grid::make()
                             ->schema([
-                                Infolists\Components\TextEntry::make('name'),
-                                Infolists\Components\TextEntry::make('descriptiona'),
+                                Infolists\Components\TextEntry::make('name')
+                                    ->label('Name'),
+                                Infolists\Components\TextEntry::make('description') // Perbaikan typo 'descriptiona'
+                                    ->label('Description'),
                             ]),
+                    ]),
+                
+                // Menambahkan daftar resep yang terkait
+                Infolists\Components\Section::make('Related Recipes')
+                    ->schema([
+                        Infolists\Components\RepeatableEntry::make('recipes')
+                            ->schema([
+                                Infolists\Components\TextEntry::make('name')
+                                    ->label('Recipe Name')
+                                    ->url(fn ($record) => RecipeResource::getUrl('view', ['record' => $record])),
+                            ])
                     ]),
             ]);
     }

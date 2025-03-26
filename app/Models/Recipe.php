@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\ELoquent\Relations\BelongsTo;
-use Illuminate\Database\ELoquent\Relations\BelongsToMany;
 
 class Recipe extends Model
 {
@@ -21,12 +19,20 @@ class Recipe extends Model
         'attachment'
     ];
 
-    public function category(): BelongsTo
+    /**
+     * Get the image path from attachment.
+     */
+    public function getImagePathAttribute()
+    {
+        return $this->attachment;
+    }
+
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function ingredients(): BelongsToMany
+    public function ingredients()
     {
         return $this->belongsToMany(Ingredient::class, 'recipes_ingredients')
             ->withPivot('amount', 'unit')
